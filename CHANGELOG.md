@@ -1,3 +1,9 @@
+## [1.1.0](https://github.com/stairwaytowonderland/issue-management/compare/v1.0.0...v1.1.0) (2026-06-12)
+
+### ✨ Features
+
+* updates ([4d28fbc](https://github.com/stairwaytowonderland/issue-management/commit/4d28fbc6ddca7c6e70d00e54faeb22743aba6806))
+
 ## 1.0.0 (2026-06-12)
 
 ### ✨ Features
