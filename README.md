@@ -7,7 +7,7 @@
 [![semantic-release: conventionalcommits](https://img.shields.io/badge/semantic--release-cc-FE5196?logo=semantic-release)](https://github.com/semantic-release/semantic-release)
 [![pre-commit](https://img.shields.io/badge/pre--commit-FAB040?logo=pre-commit&logoColor=black)](https://github.com/pre-commit/pre-commit)
 
-A minimal starting point for a basic repository. :ocean: :surfer: :rocket: :flying_saucer: :ringed_planet: :milky_way: :alien:
+A centralized issue management repository. :lady_beetle:
 
 ## :cactus: Project structure
 
@@ -25,8 +25,8 @@ A minimal starting point for a basic repository. :ocean: :surfer: :rocket: :flyi
 │   │   ├── import-csv-issues.yaml
 │   │   ├── pre-commit.yaml
 │   │   ├── publish.yaml
-│   │   ├── repository-created.yaml
-│   │   └── release.yaml
+│   │   ├── release.yaml
+│   │   └── repository-created.yaml
 │   └── dependabot.yml
 ├── .editorconfig
 ├── .gitignore
@@ -34,170 +34,59 @@ A minimal starting point for a basic repository. :ocean: :surfer: :rocket: :flyi
 ├── .pre-commit-config.yaml
 ├── .prettierignore
 ├── .prettierrc
+├── .releaserc
 ├── LICENSE
 ├── README.md
-└── TODO.csv
+├── TODO.csv
 └── TODO.example.csv
 ```
 
-## :white_check_mark: Good first tasks
-
-- [x] **:one: Create your repo:** Use this template to create your own repo.
-- [x] **:two: Create some labels:** Run the [Create Labels](https://github.com/stairwaytowonderland/issue-management/actions/workflows/create-labels.yaml)
-  _workflow_ to create some additional useful labels.
-- [ ] **:three: Create some issues:** Run the [Import Issues from CSV](https://github.com/stairwaytowonderland/issue-management/actions/workflows/import-csv-issues.yaml)
-  _workflow_ to create your first issues.
-
 ---
 
-## :rocket: Getting started
+## :arrows_counterclockwise: Reusable Workflows
 
-### :a: Option "A": Use this template
+### `import-csv-issues`
 
-1. Click the **Use this template** button at the top of the repository
-1. Select **Create a new repository**
-1. Select an owner and name for your new repository
-1. Click **Create repository**
-1. Clone your new repository
+**Description:**
+Reusable workflow to import issues from a CSV file.
 
-> [!IMPORTANT]
->
-> Make sure to  update the [`README.md`](./README.md) and the [`LICENSE`](./LICENSE) files accordingly.
+**Usage Example:**
 
-### :b: Option "B": Clone this repo
-
-```bash
-git clone git@github.com:stairwaytowonderland/repository-template.git
+```yaml
+uses: stairwaytowonderland/actions/.github/workflows/import-csv-issues.yaml@main
+with:
+  csv-path: path/to/issues.csv
+  dry-run: false
+  batch: true
+  allow-duplicates: false
+  allow-closed-duplicates: false
+  ref: main
+  action-ref: main
+  node-version: 24
+  max-parallel: 5
+secrets:
+  github-token: ${{ secrets.GH_PAT }}
 ```
 
-#### Create a new repository from the command line
+**Inputs:**
 
-```bash
-# Delete the .git folder from cloned project
-rm -rf .git
+| Name                      | Description                                                                     | Required | Type    | Default    |
+| ------------------------- | ------------------------------------------------------------------------------- | -------- | ------- | ---------- |
+| `ref`                     | Git ref of the shared actions repo to use (e.g. `main` or a tag/commit)         | No       | string  | `main`     |
+| `action-ref`              | Git ref of the shared actions repo to use (e.g. `main` or a tag/commit)         | No       | string  | `main`     |
+| `node-version`            | Node.js version to use for parsing CSV (e.g. `18`, `20`, `24`)                  | No       | string  | `24`       |
+| `dry-run`                 | Dry run (no issues created)                                                     | No       | boolean | `true`     |
+| `max-parallel`            | Maximum number of parallel issue creations (only applies when `batch` is false) | No       | number  | `5`        |
+| `batch`                   | Create issues in batches (by type)                                              | No       | boolean | `true`     |
+| `allow-duplicates`        | Allow creating duplicate issues                                                 | No       | boolean | `false`    |
+| `allow-closed-duplicates` | Allow creating duplicate issues for closed issues                               | No       | boolean | `false`    |
+| `csv-path`                | Path (relative) to the CSV file                                                 | Yes      | string  | `TODO.csv` |
 
-# Overwrite README with your content
-echo "# issue-management" > README.md
+**Secrets:**
 
-# Initialize new git local repository
-git init
-
-# Set default branch
-git branch -M main
-
-# Make first commit empty to allow easier rebasing
-git commit --no-verify --allow-empty -m "chore: initial empty commit"
-
-# Install pre-commit hooks
-# (make sure `pre-commit` is installed ... install it using `pip` or `brew`)
-pre-commit install
-
-# Add all files (make sure your .gitignore file is properly configured)
-git add .
-
-# Second commit
-git commit -m "chore: adding initial files"
-
-# Set remote ...
-# To update the url (instead of add), use `git remote set-url origin <GIT_URL>`
-git remote add origin git@github.com:<user-or-org>/<new-existing-repo>.git
-
-# Push to remote
-git push -u origin main
-```
-
-## :package: Releasing
-
-This template uses **`semantic-release`** with the _conventionalcommits_ preset by default.
-
-### :label: Tags/Releases
-
-**The creation of tags and releases is handled _automatically_ by the pre-configured [_workflows_](./.github/workflows/).**
-
-_Default [`package.json`](https://github.com/stairwaytowonderland/issue-management/blob/main/templates/package.json)
-and [`.releaserc`](https://github.com/stairwaytowonderland/issue-management/blob/main/templates/releaserc.json)
-files_ will be used instead of being included in this template, however those files can be copied into this project for
-additional customizations, such as [including a `CHANGELOG`](#page_with_curl-including-a-changelog).
-
-> [!TIP]
->
-> In most cases, only the `.releaserc` needs to by _copied/customized_.
-
-### :page_with_curl: Including a `CHANGELOG`
-
-To have the generated `CHANGELOG` automatically committed:
-
-1. Copy the _default [.releaserc](https://github.com/stairwaytowonderland/issue-management/blob/main/templates/releaserc.json)_
-file into your project.
-2. Add the `@semantic-release/git` _plugin_ configuration **to the end of the _plugins_ section** in your [`.releaserc`](./.releaserc):
-
-    ```json
-    [
-      "@semantic-release/git",
-      {
-        "assets": ["CHANGELOG.md"],
-        "message": "chore(release): ${nextRelease.version}\n\n${nextRelease.notes}"
-      }
-    ]
-    ```
-
-> [!NOTE]
->
-> If using an altered or different `.releaserc` file, you must also ensure the `@semantic-release/changelog` _plugin_ is
-> configured:
->
-> ```json
-> [
->   "@semantic-release/changelog",
->   {
->     "changelogFile": "CHANGELOG.md"
->   }
-> ]
-> ```
-
-### :electric_plug: _"RC"_ Plugin ordering
-
-> [!IMPORTANT]
->
-> The **order of plugins DOES matter** in the _release configuration file (`.releaserc`)_!
->
-> The `@semantic-release/changelog` plugin is typically one of the first in the _`plugins` array_, **after** `semantic-release-export-data`
-> but **before** `@semantic-release/commit-analyzer`.
-
-## :paintbrush: Further customizations
-
-### :fountain_pen: Contributing details
-
-For customized **contributing details**, create a `CONTRIBUTING.md` in this repo:
-
-```bash
-echo "# Contributing Guidelines" > CONTRIBUTING.md
-```
-
-> [!TIP]
->
-> You may copy this organization's [`CONTRIBUTING.md`](https://github.com/stairwaytowonderland/.github/blob/main/CONTRIBUTING.md)
-> file as a starting point.
-
-### :lady_beetle: Issues and PRs
-
-For simplicity reasons, this template repo doesn't include the `ISSUE_TEMPLATE` and `PULL_REQUEST_TEMPLATE` _(.md)_
-files.
-
-> [!NOTE]
->
-> If **_using this template in another org_, or to _add those files to your project for futher customization_**, copy
-> them from this organization's [_special .github repo_](https://github.com/stairwaytowonderland/.github/tree/main/.github).
-
-## :surfer: Essential tools
-
-- [Visual Studio Code](https://code.visualstudio.com/) (a.k.a. _VS Code_)
-- [EditorConfig](https://editorconfig.org/)
-- [pre-commit](https://pre-commit.com/)
-- [Prettier](https://prettier.io/)
-  > :memo: **Note:** For a more customized experience, some files might need to be excluded from _Prettier_.
-  >
-  > See the [official docs](https://prettier.io/docs/ignore) for details on ignoring code.
+| Name           | Description                                                                     |
+| -------------- | ------------------------------------------------------------------------------- |
+| `github-token` | Optional token with permissions to create issues (falls back to `GITHUB_TOKEN`) |
 
 ---
 
