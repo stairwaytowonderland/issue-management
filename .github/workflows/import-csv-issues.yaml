@@ -132,6 +132,7 @@ jobs:
           csv-path: ${{ inputs.csv-path }}
 
       - name: Parse CSV and build matrix (with default actions ref)
+        if: ${{ inputs.ref == '' }}
         id: parse-default
         uses: stairwaytowonderland/actions/.github/actions/parse-issue-csv-action@v1
         with:
