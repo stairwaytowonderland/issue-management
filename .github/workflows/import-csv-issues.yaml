@@ -1,7 +1,7 @@
 name: Issues Import (from CSV)
 
 concurrency:
-  group: ${{github.repository}}-${{ github.workflow }}
+  group: ${{ github.repository }}-${{ github.workflow }}-${{ format('{0}/{1}', inputs.owner, inputs.repo) || github.repository }}
   cancel-in-progress: false
 
 on:
