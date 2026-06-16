@@ -1,3 +1,9 @@
+## [1.5.0](https://github.com/stairwaytowonderland/issue-management/compare/v1.4.0...v1.5.0) (2026-06-16)
+
+### ✨ Features
+
+* update workflow reference ([852f3eb](https://github.com/stairwaytowonderland/issue-management/commit/852f3eb8a3231684286d6aab292dadd8954f3486))
+
 ## [1.4.0](https://github.com/stairwaytowonderland/issue-management/compare/v1.3.0...v1.4.0) (2026-06-12)
 
 ### ✨ Features
