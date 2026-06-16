@@ -230,7 +230,7 @@ jobs:
 
       - name: Create issues by type (with specified actions ref)
         if: ${{ inputs.ref != '' && fromJson(needs.parse-csv.outputs.matrix)[matrix.type].include[0] != null }}
-        uses: ./.actions/.github/actions/issue-create-action
+        uses: ./.actions/.github/actions/issue-import-action
         with:
           github-token: ${{ secrets.github-token || secrets.GH_PAT_CREATE_ISSUE }}
           owner: ${{ inputs.owner || '' }}
@@ -244,7 +244,7 @@ jobs:
 
       - name: Create issues by type (with default actions ref)
         if: ${{ inputs.ref == '' && fromJson(needs.parse-csv.outputs.matrix)[matrix.type].include[0] != null }}
-        uses: stairwaytowonderland/actions/.github/actions/issue-create-action@v1
+        uses: stairwaytowonderland/actions/.github/actions/issue-import-action@v1
         with:
           github-token: ${{ secrets.github-token || secrets.GH_PAT_CREATE_ISSUE }}
           owner: ${{ inputs.owner || '' }}
@@ -305,7 +305,7 @@ jobs:
 
       - name: Create issue (with specified actions ref)
         if: ${{ inputs.ref != '' }}
-        uses: ./.actions/.github/actions/issue-create-action
+        uses: ./.actions/.github/actions/issue-import-action
         with:
           github-token: ${{ secrets.github-token || secrets.GH_PAT_CREATE_ISSUE }}
           owner: ${{ inputs.owner || '' }}
@@ -324,7 +324,7 @@ jobs:
 
       - name: Create issue (with default actions ref)
         if: ${{ inputs.ref == '' }}
-        uses: stairwaytowonderland/actions/.github/actions/issue-create-action@v1
+        uses: stairwaytowonderland/actions/.github/actions/issue-import-action@v1
         with:
           github-token: ${{ secrets.github-token || secrets.GH_PAT_CREATE_ISSUE }}
           owner: ${{ inputs.owner || '' }}
