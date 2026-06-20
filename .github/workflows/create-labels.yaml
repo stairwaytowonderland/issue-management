@@ -22,5 +22,5 @@ jobs:
     uses: stairwaytowonderland/label-management/.github/workflows/create-labels.yaml@v1
     secrets: inherit
     with:
-      dry-run: ${{ inputs.dry-run == true || github.event.workflow_run.conclusion != 'success' }}
+      dry-run: ${{ github.event.workflow_run.conclusion != 'success' }}
       update-existing: ${{ inputs.update-existing == true }}
