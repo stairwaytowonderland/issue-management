@@ -20,8 +20,7 @@ jobs:
     name: Create Labels
     # if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     uses: stairwaytowonderland/label-management/.github/workflows/create-labels.yaml@v1
+    secrets: inherit
     with:
       dry-run: ${{ inputs.dry-run || github.event.workflow_run.conclusion != 'success' }}
       update-existing: ${{ inputs.update-existing || false }}
-    secrets:
-      github-token: ${{ secrets.GITHUB_TOKEN }}

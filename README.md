@@ -64,8 +64,7 @@ with:
   action-ref: main
   node-version: 24
   max-parallel: 5
-secrets:
-  github-token: ${{ secrets.GH_PAT }}
+secrets: inherit
 ```
 
 **Inputs:**
