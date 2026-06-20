@@ -1,3 +1,9 @@
+## [1.6.0](https://github.com/stairwaytowonderland/issue-management/compare/v1.5.0...v1.6.0) (2026-06-20)
+
+### ✨ Features
+
+* using app ([7bebeaf](https://github.com/stairwaytowonderland/issue-management/commit/7bebeafe144249488e7a6cbe2cd56f50adda81dc))
+
 ## [1.5.0](https://github.com/stairwaytowonderland/issue-management/compare/v1.4.0...v1.5.0) (2026-06-16)
 
 ### ✨ Features
