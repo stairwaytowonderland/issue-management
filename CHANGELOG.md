@@ -1,3 +1,9 @@
+## [1.11.0](https://github.com/stairwaytowonderland/issue-management/compare/v1.10.0...v1.11.0) (2026-06-20)
+
+### ✨ Features
+
+* update create-labels ([264ce15](https://github.com/stairwaytowonderland/issue-management/commit/264ce15b949df649009e3974f7b030cedd1ec0e0))
+
 ## [1.10.0](https://github.com/stairwaytowonderland/issue-management/compare/v1.9.0...v1.10.0) (2026-06-20)
 
 ### ✨ Features
