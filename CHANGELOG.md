@@ -1,3 +1,9 @@
+## [1.12.0](https://github.com/stairwaytowonderland/issue-management/compare/v1.11.0...v1.12.0) (2026-06-20)
+
+### ✨ Features
+
+* update concurrency ([07367ab](https://github.com/stairwaytowonderland/issue-management/commit/07367ab660a3ac5d944aaeb2c006055343265060))
+
 ## [1.11.0](https://github.com/stairwaytowonderland/issue-management/compare/v1.10.0...v1.11.0) (2026-06-20)
 
 ### ✨ Features
