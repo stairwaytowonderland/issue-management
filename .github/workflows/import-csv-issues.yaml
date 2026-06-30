@@ -120,7 +120,7 @@ jobs:
       - name: Install PapaParse
         run: npm install papaparse
 
-      - name: Parse CSV and build matrix (with default actions ref)
+      - name: Parse CSV and build matrix
         id: parse-default
         uses: stairwaytowonderland/actions/.github/actions/parse-issue-csv-action@v1
         with:
@@ -173,7 +173,7 @@ jobs:
           owner: ${{ needs.repo-info.outputs.repo-owner }}
           repositories: ${{ needs.repo-info.outputs.repo-name }}
 
-      - name: Ensure only needed labels exist (with default actions ref)
+      - name: Ensure only needed labels exist
         uses: stairwaytowonderland/actions/.github/actions/labels-create-action@v1
         with:
           github-token: ${{ secrets.github-token || steps.generate-token.outputs.token }}
@@ -203,7 +203,7 @@ jobs:
           owner: ${{ needs.repo-info.outputs.repo-owner }}
           repositories: ${{ needs.repo-info.outputs.repo-name }}
 
-      - name: Create issues by type (with default actions ref)
+      - name: Create issues by type
         if: ${{ fromJson(needs.parse-csv.outputs.matrix)[matrix.type].include[0] != null }}
         uses: stairwaytowonderland/actions/.github/actions/issue-import-action@v1
         with:
@@ -263,7 +263,7 @@ jobs:
           owner: ${{ needs.repo-info.outputs.repo-owner }}
           repositories: ${{ needs.repo-info.outputs.repo-name }}
 
-      - name: Create issue (with default actions ref)
+      - name: Create issue
         uses: stairwaytowonderland/actions/.github/actions/issue-import-action@v1
         with:
           github-token: ${{ secrets.github-token || steps.generate-token.outputs.token }}
