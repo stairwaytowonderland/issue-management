@@ -1,51 +1,63 @@
-name: CI
+name: 🔄 CI
 
 on:
   push:
-    # Fires when a tag matching v* is pushed with personal credentials.
-    tags: ['v*']
-    branches: [main]
+    branches:
+      - main
     paths-ignore:
       - 'CHANGELOG.md'
       - 'package.json'
       - 'package-lock.json'
+
+    tags:
+      - 'v*'
+
   workflow_dispatch:
-    inputs:
-      fail-on-no-release:
-        description: 'Fail the workflow if no release is published (e.g. if there are no relevant commits).'
-        type: boolean
-      publish:
-        description: 'Whether to run in publish mode.'
-        type: boolean
 
 concurrency:
   group: '${{ github.repository_id }}-${{ github.ref_name }}'
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.event_name == 'push' }}
 
 # Use PAT instead of GITHUB_TOKEN to cause semantic-release to trigger tag pipeline when tag is created.
 # 'Fine-grained token' repo permissions: Contents
 
+permissions:
+  actions: write
+  contents: write
+  issues: write
+  pull-requests: write
+
 jobs:
+  meta:
+    name: Meta
+    uses: stairwaytowonderland/.github/.github/workflows/ci-meta.yaml@v1
+    permissions:
+      contents: read
+
   release:
     name: Release
-    if: startsWith(github.ref, 'refs/heads/main') && ! inputs.publish
+    needs: [meta]
+    if: needs.meta.outputs.is-release-workflow == 'true'
     uses: ./.github/workflows/release.yaml
-    with:
-      # dispatch-workflow: publish.yaml
-      fail-on-no-release: ${{ inputs.fail-on-no-release == true }}
     secrets: inherit
+    # To use the dispatch-workflow for the first release, uncomment the following:
+    # with:
+    #   dispatch-workflow: ${{ needs.meta.outputs.has-release-tags != 'true' && 'publish.yaml' || '' }}
 
   publish:
     name: Publish
-    if: startsWith(github.ref, 'refs/tags/v') || inputs.publish
+    needs: [meta]
+    if: needs.meta.outputs.is-publish-workflow == 'true'
     uses: ./.github/workflows/publish.yaml
+    permissions:
+      contents: write
+    secrets: inherit
     with:
       tag: ${{ github.ref_name }}
-    secrets: inherit
 
-  update-majorver:
-    name: Update Major Version Tag
+  normalize-majorver:
+    name: Normalize Major Version Tag
     needs: [publish]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: nowactions/update-majorver@v1
+    uses: stairwaytowonderland/.github/.github/workflows/normalize-majorver.yaml@v1
+    permissions:
+      contents: write
