@@ -276,7 +276,7 @@ jobs:
           status: ${{ matrix.issue.status }}
           completed: ${{ matrix.issue.completed }}
           dry-run: ${{ inputs.dry-run == true }}
-          allow-duplicates: ${{ inputs.allow-duplicates }}
-          allow-closed-duplicates: ${{ inputs.allow-closed-duplicates }}
+          allow-duplicates: ${{ inputs.allow-duplicates == true }}
+          allow-closed-duplicates: ${{ inputs.allow-closed-duplicates == true }}
           priority-field-id: 535200
           effort-field-id: 535203
