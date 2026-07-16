@@ -53,7 +53,7 @@ Reusable workflow to import issues from a CSV file.
 **Usage Example:**
 
 ```yaml
-uses: stairwaytowonderland/.github/.github/workflows/import-csv-issues.yaml@v1
+uses: stairwaytowonderland/issue-management/.github/workflows/import-csv-issues.yaml@v1
 with:
   csv-path: path/to/issues.csv
   dry-run: false
