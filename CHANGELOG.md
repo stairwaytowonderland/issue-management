@@ -1,3 +1,20 @@
+## [1.13.0](https://github.com/stairwaytowonderland/issue-management/compare/v1.12.0...v1.13.0) (2026-07-21)
+
+### ✨ Features
+
+* update LICENSE ([3d41f56](https://github.com/stairwaytowonderland/issue-management/commit/3d41f568dea107361ef3828ca880fbde344dfb23))
+
+### 🔧 Chores
+
+* **deps:** bump actions/checkout from 6 to 7 ([#1](https://github.com/stairwaytowonderland/issue-management/issues/1)) ([c566ae1](https://github.com/stairwaytowonderland/issue-management/commit/c566ae164032e54fb81fbc5e98566a8a737c1590))
+* update dependabot labels ([305e9e9](https://github.com/stairwaytowonderland/issue-management/commit/305e9e984b51c02a31ec99558ea10710040a7bd8))
+* update dependabot.yml ([a0172f7](https://github.com/stairwaytowonderland/issue-management/commit/a0172f782a40127ec8f80b2649be4888d454b667))
+* update README ([81589d5](https://github.com/stairwaytowonderland/issue-management/commit/81589d5ac69a635e615813df13a3af0977e10348))
+* update reuseable workflow references ([9eed42b](https://github.com/stairwaytowonderland/issue-management/commit/9eed42b3dd343f74e4c4bee12afcc908382a55e2))
+* update workflow ([58653ef](https://github.com/stairwaytowonderland/issue-management/commit/58653efe473f688853704b23cc932ebaba7e614a))
+* update workflow ([48e0175](https://github.com/stairwaytowonderland/issue-management/commit/48e01750dcdf8f9b9edc1ee3fa449a4ab5dfa0b3))
+* using normalize-majorver ([82b6970](https://github.com/stairwaytowonderland/issue-management/commit/82b6970e4a1f6bd43b6e27cec5a49a594d4ce1f2))
+
 ## [1.12.0](https://github.com/stairwaytowonderland/issue-management/compare/v1.11.0...v1.12.0) (2026-06-20)
 
 ### ✨ Features
